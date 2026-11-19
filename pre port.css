@@ -1,0 +1,375 @@
+/* ==================== ANDROID & MOBILE RESPONSIVE CSS ==================== */
+html,
+body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    font-size: clamp(13.5px, 3.6vw, 16px);
+}
+
+/* Header */
+header {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    min-height: 64px;
+    padding: 10px 4%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.logo {
+    font-size: clamp(18px, 5vw, 22px);
+    white-space: nowrap;
+}
+
+nav {
+    display: none;
+}
+
+.nav-right {
+    flex-shrink: 0;
+}
+
+.auth-trigger-btn {
+    padding: 7px 12px;
+    font-size: 12.5px;
+    white-space: nowrap;
+}
+
+/* Hero Section */
+.hero {
+    width: 100%;
+    max-width: 100%;
+    min-height: auto;
+    padding: 24px 4% 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 22px;
+    background: radial-gradient(circle at 75% 25%, #164536 0, transparent 45%);
+}
+
+.hero-text {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    text-align: left;
+}
+
+.small-title,
+.hero .label {
+    font-size: clamp(10px, 2.7vw, 11.5px);
+    letter-spacing: 1.5px;
+    margin: 0 0 8px 0;
+}
+
+.hero h1 {
+    font-size: clamp(28px, 8.2vw, 42px);
+    line-height: 1.1;
+    letter-spacing: -1px;
+    margin: 0 0 10px 0;
+}
+
+.hero h2 {
+    font-size: clamp(15px, 4.2vw, 19px);
+    line-height: 1.35;
+    margin: 10px 0;
+}
+
+.hero-text > p {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    font-size: clamp(13px, 3.5vw, 15px);
+    line-height: 1.55;
+}
+
+.buttons {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 16px;
+    justify-content: flex-start;
+}
+
+.btn {
+    padding: 10px 16px;
+    font-size: 13px;
+}
+
+/* Hero Profile Image & Irregular Shape */
+.profile {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    min-height: 240px;
+    margin: 6px auto 0;
+    padding: 6px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    left: 0;
+    top: 0;
+}
+
+.photo-box {
+    width: min(230px, 62vw);
+    height: min(250px, 66vw);
+    margin: 0 auto;
+    position: relative;
+    left: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.shape {
+    position: absolute;
+    width: 92%;
+    height: 92%;
+    top: 6%;
+    left: 4%;
+    margin: 0;
+    z-index: 1;
+}
+
+.profile img {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 92%;
+    height: 96%;
+    max-width: 100%;
+    object-fit: cover;
+    object-position: top center;
+    border-radius: 85px 85px 18px 18px;
+    z-index: 2;
+}
+
+.wrap,
+.card {
+    width: 100%;
+    max-width: 100%;
+    padding: 6px 0 0;
+    margin: 0;
+    left: 0;
+    top: 0;
+}
+
+canvas {
+    width: 100%;
+    max-width: min(280px, 80vw);
+    height: auto;
+    margin: 0 auto;
+}
+
+/* About Section */
+.section {
+    width: 100%;
+    max-width: 100%;
+    padding: 34px 4%;
+    margin: 0;
+    overflow: hidden;
+}
+
+.section h2 {
+    width: 100%;
+    font-size: clamp(26px, 7.2vw, 36px);
+    letter-spacing: -0.8px;
+    margin: 0 0 10px 0;
+    text-align: left;
+}
+
+.section p.label,
+.section p.slide-left {
+    width: 100%;
+    font-size: clamp(17px, 4.6vw, 22px);
+    margin: 0 0 12px 0;
+    left: 0;
+    top: 0;
+    text-align: left;
+}
+
+.description1,
+.description2 {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    margin: 0 0 14px 0;
+    left: 0;
+    top: 0;
+    font-size: clamp(13.5px, 3.6vw, 15.5px);
+    line-height: 1.6;
+    text-align: left;
+}
+
+.custom-box {
+    width: min(220px, 60vw);
+    height: min(250px, 68vw);
+    margin: 18px auto 0;
+    left: 0;
+    top: 0;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+}
+
+.about-image {
+    width: min(280px, 78vw);
+    height: min(300px, 82vw);
+    margin: 14px auto 0;
+    left: 0;
+    top: 0;
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.about-image img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: top center;
+}
+
+/* Skills & Projects */
+.skills-grid,
+.projects-grid {
+    width: 100%;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 20px;
+}
+
+.skill-card,
+.project-card {
+    width: 100%;
+    max-width: 100%;
+}
+
+.project-img {
+    width: 100%;
+    height: 170px;
+}
+
+.project-content {
+    padding: 18px;
+}
+
+/* Contact Section */
+.contact {
+    width: 100%;
+    max-width: 100%;
+    position: relative;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 34px 4% 20px;
+    text-align: center;
+    scroll-margin-top: 75px;
+}
+
+.contact p.label {
+    width: 100%;
+    margin: 0 auto 8px;
+    left: 0;
+    top: 0;
+    font-size: clamp(17px, 4.6vw, 22px);
+}
+
+.contact h2 {
+    width: 100%;
+    margin: 0 auto 12px;
+    left: 0;
+    top: 0;
+    font-size: clamp(26px, 7.2vw, 36px);
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+}
+
+.contact span {
+    position: static;
+    left: 0;
+    font-size: inherit;
+    letter-spacing: inherit;
+}
+
+.description {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto 16px;
+    left: 0;
+    top: 0;
+    padding: 0 4px;
+    font-size: clamp(13.5px, 3.6vw, 15.5px);
+    line-height: 1.6;
+    text-align: center;
+    position: static;
+}
+
+.contact-btn-wrapper {
+    position: relative;
+    display: inline-block;
+    margin: 6px auto 12px;
+}
+
+.contact-button {
+    margin-top: 0;
+    padding: 10px 22px;
+    font-size: 14px;
+}
+
+.contact-dropdown-menu {
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 92vw;
+}
+
+.background-video {
+    position: static;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 170px;
+    margin-top: 14px;
+}
+
+/* Footer */
+.footer {
+    width: 100%;
+    max-width: 100%;
+    position: relative;
+    top: 0;
+    left: 0;
+    margin-top: 20px;
+    padding: 28px 4% 16px;
+}
+
+.footer-container {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 18px;
+}
+
+.footer-brand,
+.footer-links,
+.footer-contact {
+    width: 100%;
+    flex: none;
+}
+
+.social-links {
+    justify-content: center;
+    flex-wrap: wrap;
+}

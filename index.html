@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+
+
+
+    <title>Abdullah Hamid | Web Developer</title>
+   
+    <link rel="stylesheet" href="port.css">
+<link id="pre port.css" rel="stylesheet" href="pre port.css" disabled>
+</head>
+
+<body>
+<script>
+(function () {
+    const mobileMedia = window.matchMedia('(max-width: 900px)');
+   const mobileSheet = document.getElementById('pre port.css');
+
+    function isAndroidOrMobileScreen() {
+        const ua = navigator.userAgent || '';
+        const isMobileUA = /Android|iPhone|iPad|iPod|Mobile|Vivo|Samsung|OPPO|MIUI/i.test(ua);
+        const smallScreen = window.innerWidth <= 900 || mobileMedia.matches;
+        return isMobileUA || smallScreen;
+    }
+
+    function syncMobileLayout() {
+        const mobileActive = isAndroidOrMobileScreen();
+        if (mobileSheet) {
+            mobileSheet.disabled = !mobileActive;
+        }
+        document.body.classList.toggle('mobile-mode', mobileActive);
+        document.body.classList.toggle('desktop-mode', !mobileActive);
+    }
+
+    syncMobileLayout();
+    window.addEventListener('DOMContentLoaded', syncMobileLayout);
+    window.addEventListener('load', syncMobileLayout);
+    window.addEventListener('resize', syncMobileLayout);
+    window.addEventListener('orientationchange', syncMobileLayout);
+
+    if (mobileMedia.addEventListener) {
+        mobileMedia.addEventListener('change', syncMobileLayout);
+    } else if (mobileMedia.addListener) {
+        mobileMedia.addListener(syncMobileLayout);
+    }
+})();
+</script>
+
+
+<script>
+if (document.body.classList.contains('mobile-mode')) {
+  const hero = document.querySelector('#home.hero, .hero');
+  const profile = document.querySelector('.hero-text .profile');
+  if (hero && profile) hero.appendChild(profile);
+}
+</script>
+<header>
+    <div class="logo">Abdullah<span>.</span></div>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+<!-- === 1. NAVBAR RIGHT CORNER LOGIN BUTTON / ACCOUNT DISPLAY === -->
+<div class="nav-right">
+    <button id="openAuthBtn" class="auth-trigger-btn">Login / Sign Up</button>
+    <!-- جب یوزر لاگ ان ہو جائے گا تو یہ اکاؤنٹ ڈسپلے یہاں شو ہوگا -->
+    <div id="userAccountDisplay" class="user-account-display" style="display: none;">
+        <span class="user-avatar" id="userInitial">A</span>
+        <span id="userNameText">Abdullah</span>
+    </div>
+</div>
+
+
+<!-- === 2. CENTERED LOGIN / SIGN UP MODAL === -->
+<div id="authModal" class="auth-modal">
+    <div class="auth-box">
+        <span id="closeAuthBtn" class="close-btn">&times;</span>
+        
+        <!-- Tabs -->
+        <div class="auth-tabs">
+            <button id="loginTab" class="tab-btn active">Login</button>
+            <button id="signupTab" class="tab-btn">Sign Up</button>
+        </div>
+
+        <!-- Login Form -->
+        <form id="loginForm" class="auth-form active">
+            <h3>Welcome <span>Back.</span></h3>
+            <p>Access your account</p>
+            
+            <input type="email" id="loginEmail" placeholder="Email Address" required>
+            <input type="password" id="loginPassword" placeholder="Password" required>
+            <button type="submit" class="submit-btn">Login Now</button>
+
+            <div class="auth-divider"><span>OR</span></div>
+
+            <!-- Google Sign-In -->
+            <button type="button" class="google-btn" id="googleLoginBtn">
+                <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#EA4335" d="M12 5c1.6 0 3 .6 4.1 1.6l3.1-3.1C17.3 1.8 14.8 1 12 1 7.4 1 3.5 3.6 1.6 7.4l3.7 2.9C6.2 7.3 8.9 5 12 5z"/><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5c-.3 1.5-1.1 2.8-2.4 3.7l3.7 2.9c2.2-2 3.7-5 3.7-8.8z"/><path fill="#FBBC05" d="M5.3 14.7c-.2-.7-.4-1.5-.4-2.7s.2-2 .4-2.7L1.6 6.4C.6 8.4 0 10.6 0 13s.6 4.6 1.6 6.6l3.7-2.9z"/><path fill="#34A853" d="M12 23c3.2 0 6-1.1 8-3l-3.7-2.9c-1.1.7-2.5 1.2-4.3 1.2-3.1 0-5.8-2.3-6.7-5.3L1.6 15.6C3.5 19.4 7.4 22 12 23z"/></svg>
+                Continue with Google
+            </button>
+
+            <!-- Join WhatsApp Channel Option -->
+            <a href="https://whatsapp.com/channel/0029VbB1V2d3QxRsd6hLU50r" target="_blank" class="whatsapp-modal-btn">
+                <svg width="18" height="18" viewBox="0 0 32 32" fill="#25D366"><path d="M16 2a13.9 13.9 0 0 0-12 20.9L2.2 29.8l7.1-1.8A14 14 0 1 0 16 2zm0 25.5a11.5 11.5 0 0 1-5.9-1.6l-.4-.3-4.4 1.1 1.2-4.3-.3-.4A11.5 11.5 0 1 1 16 27.5zm6.3-8.6c-.3-.2-2-1-2.3-1.1s-.5-.2-.8.2-.9 1.1-1.1 1.3-.4.2-.7.1a9.4 9.4 0 0 1-2.8-1.7 10.5 10.5 0 0 1-1.9-2.4c-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.4.3-.6s0-.4-.1-.6-.8-1.9-1.1-2.6c-.3-.7-.6-.6-.8-.6h-.7a1.3 1.3 0 0 0-1 .5 4 4 0 0 0-1.3 3 7 7 0 0 0 1.5 3.7 16 16 0 0 0 6.1 5.4c.8.4 1.5.6 2 .8a4.8 4.8 0 0 0 2.2.1 3.6 3.6 0 0 0 2.4-1.7 3 3 0 0 0 .2-1.7c-.1-.2-.3-.3-.6-.4z"/></svg>
+                Join Our WhatsApp Channel
+            </a>
+        </form>
+
+        <!-- Sign Up Form -->
+        <form id="signupForm" class="auth-form">
+            <h3>Create <span>Account.</span></h3>
+            <p>Join us and get started</p>
+            
+            <input type="text" id="signupName" placeholder="Full Name" required>
+            <input type="email" id="signupEmail" placeholder="Email Address" required>
+            <input type="password" id="signupPassword" placeholder="Create Password" required>
+            <button type="submit" class="submit-btn">Sign Up</button>
+
+            <div class="auth-divider"><span>OR</span></div>
+
+            <button type="button" class="google-btn" id="googleSignupBtn">
+                <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#EA4335" d="M12 5c1.6 0 3 .6 4.1 1.6l3.1-3.1C17.3 1.8 14.8 1 12 1 7.4 1 3.5 3.6 1.6 7.4l3.7 2.9C6.2 7.3 8.9 5 12 5z"/><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5c-.3 1.5-1.1 2.8-2.4 3.7l3.7 2.9c2.2-2 3.7-5 3.7-8.8z"/><path fill="#FBBC05" d="M5.3 14.7c-.2-.7-.4-1.5-.4-2.7s.2-2 .4-2.7L1.6 6.4C.6 8.4 0 10.6 0 13s.6 4.6 1.6 6.6l3.7-2.9z"/><path fill="#34A853" d="M12 23c3.2 0 6-1.1 8-3l-3.7-2.9c-1.1.7-2.5 1.2-4.3 1.2-3.1 0-5.8-2.3-6.7-5.3L1.6 15.6C3.5 19.4 7.4 22 12 23z"/></svg>
+                Continue with Google
+            </button>
+
+            <a href="https://whatsapp.com/channel/0029VbB1V2d3QxRsd6hLU50r" target="_blank" class="whatsapp-modal-btn">
+                <svg width="18" height="18" viewBox="0 0 32 32" fill="#25D366"><path d="M16 2a13.9 13.9 0 0 0-12 20.9L2.2 29.8l7.1-1.8A14 14 0 1 0 16 2zm0 25.5a11.5 11.5 0 0 1-5.9-1.6l-.4-.3-4.4 1.1 1.2-4.3-.3-.4A11.5 11.5 0 1 1 16 27.5zm6.3-8.6c-.3-.2-2-1-2.3-1.1s-.5-.2-.8.2-.9 1.1-1.1 1.3-.4.2-.7.1a9.4 9.4 0 0 1-2.8-1.7 10.5 10.5 0 0 1-1.9-2.4c-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.4.3-.6s0-.4-.1-.6-.8-1.9-1.1-2.6c-.3-.7-.6-.6-.8-.6h-.7a1.3 1.3 0 0 0-1 .5 4 4 0 0 0-1.3 3 7 7 0 0 0 1.5 3.7 16 16 0 0 0 6.1 5.4c.8.4 1.5.6 2 .8a4.8 4.8 0 0 0 2.2.1 3.6 3.6 0 0 0 2.4-1.7 3 3 0 0 0 .2-1.7c-.1-.2-.3-.3-.6-.4z"/></svg>
+                Join Our WhatsApp Channel
+            </a>
+        </form>
+    </div>
+</div>  
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const authModal = document.getElementById("authModal");
+    const openAuthBtn = document.getElementById("openAuthBtn");
+    const closeAuthBtn = document.getElementById("closeAuthBtn");
+    
+    const loginTab = document.getElementById("loginTab");
+    const signupTab = document.getElementById("signupTab");
+    const loginForm = document.getElementById("loginForm");
+    const signupForm = document.getElementById("signupForm");
+
+    const userAccountDisplay = document.getElementById("userAccountDisplay");
+    const userNameText = document.getElementById("userNameText");
+    const userInitial = document.getElementById("userInitial");
+
+    // پاپ-আপ کھولنا
+    if (openAuthBtn) {
+        openAuthBtn.addEventListener("click", () => {
+            authModal.classList.add("active");
+        });
+    }
+
+    // بند کرنا
+    if (closeAuthBtn) {
+        closeAuthBtn.addEventListener("click", () => {
+            authModal.classList.remove("active");
+        });
+    }
+
+    // ٹیب سوئچنگ (Login / Sign Up)
+    loginTab.addEventListener("click", () => {
+        loginTab.classList.add("active");
+        signupTab.classList.remove("active");
+        loginForm.classList.add("active");
+        signupForm.classList.remove("active");
+    });
+
+    signupTab.addEventListener("click", () => {
+        signupTab.classList.add("active");
+        loginTab.classList.remove("active");
+        signupForm.classList.add("active");
+        loginForm.classList.remove("active");
+    });
+
+    // باہر کلک کرنے پر بند ہونا
+    window.addEventListener("click", (e) => {
+        if (e.target === authModal) {
+            authModal.classList.remove("active");
+        }
+    });
+
+    // 1. Sign Up سبمٹ کرنے پر نام شو کرنا
+    signupForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const fullName = document.getElementById("signupName").value;
+        
+        if (fullName) {
+            // Navbar کا لاگ ان بٹن چھپا دیں اور اکاؤنٹ شو کر دیں
+            openAuthBtn.style.display = "none";
+            userAccountDisplay.style.display = "flex";
+            
+            userNameText.textContent = fullName;
+            userInitial.textContent = fullName.charAt(0).toUpperCase();
+
+            authModal.classList.remove("active");
+            alert("Account created and logged in successfully!");
+        }
+    });
+
+    // 2. Login سبمٹ کرنے پر
+    loginForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const email = document.getElementById("loginEmail").value;
+        const nameFromEmail = email.split('@')[0]; // ای میل کے پہلے حصے کو نام بنا دیں گے
+        const capitalizedName = nameFromEmail.charAt(0).toUpperCase() + nameFromEmail.slice(1);
+
+        openAuthBtn.style.display = "none";
+        userAccountDisplay.style.display = "flex";
+        
+        userNameText.textContent = capitalizedName;
+        userInitial.textContent = capitalizedName.charAt(0).toUpperCase();
+
+        authModal.classList.remove("active");
+        alert("Logged in successfully!");
+    });
+
+    // 3. Google Sign-In بٹن کلک کرنے پر ڈیمو
+    const googleBtns = document.querySelectorAll("#googleLoginBtn, #googleSignupBtn");
+    googleBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+            openAuthBtn.style.display = "none";
+            userAccountDisplay.style.display = "flex";
+            
+            userNameText.textContent = "Google User";
+            userInitial.textContent = "G";
+
+            authModal.classList.remove("active");
+            alert("Successfully signed in with Google!");
+        });
+    });
+});
+</script>
+    
+<!-- === WHATSAPP WELCOME POPUP === -->
+<div id="whatsappWelcomeModal" class="wa-welcome-overlay">
+    <div class="wa-welcome-card">
+        <!-- کراس (X) بٹن -->
+        <span id="closeWaModal" class="wa-close-btn">&times;</span>
+        
+        <!-- واٹس ایپ آئیکن -->
+        <div class="wa-welcome-icon">
+            <svg width="45" height="45" viewBox="0 0 32 32" fill="#25D366">
+                <path d="M16 2a13.9 13.9 0 0 0-12 20.9L2.2 29.8l7.1-1.8A14 14 0 1 0 16 2zm0 25.5a11.5 11.5 0 0 1-5.9-1.6l-.4-.3-4.4 1.1 1.2-4.3-.3-.4A11.5 11.5 0 1 1 16 27.5zm6.3-8.6c-.3-.2-2-1-2.3-1.1s-.5-.2-.8.2-.9 1.1-1.1 1.3-.4.2-.7.1a9.4 9.4 0 0 1-2.8-1.7 10.5 10.5 0 0 1-1.9-2.4c-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.4.3-.6s0-.4-.1-.6-.8-1.9-1.1-2.6c-.3-.7-.6-.6-.8-.6h-.7a1.3 1.3 0 0 0-1 .5 4 4 0 0 0-1.3 3 7 7 0 0 0 1.5 3.7 16 16 0 0 0 6.1 5.4c.8.4 1.5.6 2 .8a4.8 4.8 0 0 0 2.2.1 3.6 3.6 0 0 0 2.4-1.7 3 3 0 0 0 .2-1.7c-.1-.2-.3-.3-.6-.4z"/>
+            </svg>
+        </div>
+        
+        <h3>Join Our WhatsApp Channel!</h3>
+        <p>Get instant updates, new web projects, and exclusive development tips directly on WhatsApp.</p>
+        
+        <!-- واٹس ایپ چینل کا لنک یہاں ڈالیں -->
+        <a href="https://whatsapp.com/channel/0029VbB1V2d3QxRsd6hLU50r" target="_blank" class="wa-join-btn">Join Now</a>
+    </div>
+</div>
+<script>
+    // --- WHATSAPP WELCOME POPUP SCRIPT ---
+document.addEventListener("DOMContentLoaded", () => {
+    const whatsappWelcomeModal = document.getElementById("whatsappWelcomeModal");
+    const closeWaModal = document.getElementById("closeWaModal");
+
+    // جیسے ہی ویب سائٹ کھلے گی، 1 سیکنڈ (1000ms) کے بعد پاپ-আপ سینٹر میں ظاہر ہو جائے گا
+    setTimeout(() => {
+        if (whatsappWelcomeModal) {
+            whatsappWelcomeModal.classList.add("active");
+        }
+    }, 1000);
+
+    // کراس (X) بٹن پر کلک کرنے سے بند ہو جائے گا
+    if (closeWaModal) {
+        closeWaModal.addEventListener("click", () => {
+            whatsappWelcomeModal.classList.remove("active");
+        });
+    }
+
+    // پاپ-আপ کے باہر بلور ایریا پر کلک کرنے سے بھی بند ہو جائے گا
+    window.addEventListener("click", (e) => {
+        if (e.target === whatsappWelcomeModal) {
+            whatsappWelcomeModal.classList.remove("active");
+        }
+    });
+});
+</script>
+</header>
+
+<section id="home" class="hero">
+
+    <div class="hero-text">
+        <p class="small-title">WEB DEVELOPER & FREELANCER</p>
+
+        <h1>
+            Hi, I'm <span>Abdullah Hamid</span>
+        </h1>
+        
+
+        <h2>
+            I build clean & modern websites.
+        </h2>
+
+        <p>
+            I'm an aspiring web developer and creative freelancer
+            passionate about building responsive websites and
+            professional digital experiences.
+        </p>
+<script>
+const animatedElements = document.querySelectorAll('.small-title, .label, .hero h1, .hero h2, .hero-text > p');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      
+        entry.target.classList.add('active');
+    } else {
+    
+      entry.target.classList.remove('active');
+    }
+  });
+}, {
+  threshold: 0.1
+});
+
+// Observe each animated element
+animatedElements.forEach((el) => {
+  observer.observe(el);
+});
+</script>
+   <div class="buttons">
+        <a href="#projects" class="btn">View Projects</a>
+        <a href="#contact" class="btn outline">Contact Me</a>
+    </div>
+
+    <div class="profile">   
+        <div class="photo-box">
+            <img src="c:\Users\abdullah\Desktop\prot web(file)\img web\Confident Blazer Portrait Cutout.png" alt="">
+            <div class="shape"></div>
+        </div>
+
+        <div class="wrap">
+            <div class="card">
+                <canvas id="c"></canvas>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+<section id="about" class="section">
+
+    <p class="label">ABOUT</p>
+
+    <h2>Creating with <span>purpose.</span></h2>
+
+    <p class="description1">
+       Hi, I'm Abdullah Hamid, an aspiring web developer and creative freelancer dedicated to bringing ideas to life on the web. I specialize in building clean, modern, and responsive websites using HTML and CSS, focusing on simplicity, speed, and user-friendly layouts.
+    </p>
+
+    <p class="description2">
+       Through continuous learning and hands-on projects, I am actively expanding my expertise in web development, programming, and graphic design. Whether it's designing a visual concept or coding a layout from scratch, I strive to craft engaging digital experiences that help brands and individuals stand out online.
+    </p>
+    <script>
+     // اس سیکشن کے تمام عناصر (بشمول اباؤٹ امیج) کو منتخب کریں
+const sectionElements = document.querySelectorAll('.section h2, .section p.label, .description1, .description2');
+
+const observer2 = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      // اسکرین پر آتے ہی active کلاس لگ جائے گی
+      entry.target.classList.add('active');
+    } else {
+      // اسکرین سے باہر جانے پر کلاس ہٹ جائے گی تاکہ دوبارہ آنے پر پھر سے اینیمیٹ ہوں
+      entry.target.classList.remove('active');
+    }
+  });
+}, {
+  threshold: 0.1
+});
+
+// ہر عنصر پر آبزرور لاگو کریں
+sectionElements.forEach((el) => {
+  observer.observe(el);
+});
+ </script>
+  <div class="custom-box"></div>
+  <div class="about-image">
+      <img src="c:\Users\abdullah\Desktop\prot web(file)\img web\Smiling Businessman Double-Pointing Cutout.png" alt="Abdullah Hamid">
+    <script>
+        const aboutBoxes = document.querySelectorAll('.about-image');
+
+const observer3 = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('active');
+    } else {
+      entry.target.classList.remove('active'); // دوبارہ سکرول کرنے پر اینیمیشن ری سیٹ ہو جائے گی
+    }
+  });
+}, {
+  threshold: 0.1
+});
+
+aboutBoxes.forEach((box) => {
+  observer.observe(box);
+});
+    </script></div>
+</section>
+
+<section id="skills" class="section">
+    <div class="skills-header">
+        <p class="slide-left">SKILLS</p>
+        <h2 class="slide-left">My <span>Toolkit.</span></h2>
+    </div>
+
+    <div class="skills-grid">
+        <!-- 01. HTML -->
+        <div class="skill-card pop-up">
+            <div class="skill-icon">
+                <svg viewBox="0 0 24 24" width="24" height="24" stroke="#63e6be" stroke-width="2" fill="none"><path d="M4 19l2-14h12l2 14-8 3-8-3z"></path><path d="M8 9h8l-1 8-3 1-3-1z" fill="rgba(99,230,190,0.1)"></path></svg>
+            </div>
+            <span>01</span>
+            <h3>HTML</h3>
+            <p>Clean and structured web pages.</p>
+        </div>
+
+        <!-- 02. CSS -->
+        <div class="skill-card pop-up">
+            <div class="skill-icon">
+                <svg viewBox="0 0 24 24" width="24" height="24" stroke="#63e6be" stroke-width="2" fill="none"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v8M8 12h8"></path></svg>
+            </div>
+            <span>02</span>
+            <h3>CSS</h3>
+            <p>Responsive and modern website designs.</p>
+        </div>
+
+        <!-- 03. JavaScript -->
+        <div class="skill-card pop-up">
+            <div class="skill-icon">
+                <svg viewBox="0 0 24 24" width="24" height="24" stroke="#63e6be" stroke-width="2" fill="none"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"></path></svg>
+            </div>
+            <span>03</span>
+            <h3>JavaScript</h3>
+            <p>Interactive website functionality.</p>
+        </div>
+
+        <!-- 04. Python -->
+        <div class="skill-card pop-up">
+            <div class="skill-icon">
+                <svg viewBox="0 0 24 24" width="24" height="24" stroke="#63e6be" stroke-width="2" fill="none"><path d="M12 2v4m0 12v4M2 12h4m12 0h4"></path></svg>
+            </div>
+            <span>04</span>
+            <h3>Python</h3>
+            <p>Programming fundamentals and logic.</p>
+        </div>
+
+        <!-- 05. Photoshop -->
+        <div class="skill-card pop-up">
+            <div class="skill-icon" style="color: #31A8FF; font-weight: bold; font-family: sans-serif; font-size: 16px;">
+                Ps
+            </div>
+            <span>05</span>
+            <h3>Photoshop</h3>
+            <p>Professional image editing and background removal.</p>
+        </div>
+
+        <!-- 06. Canva -->
+        <div class="skill-card pop-up">
+            <div class="skill-icon" style="color: #00C4CC; font-weight: bold; font-family: sans-serif; font-size: 14px;">
+                Canva
+            </div>
+            <span>06</span>
+            <h3>Canva</h3>
+            <p>Simple and attractive graphic designs.</p>
+        </div>
+    </div>
+</section>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+    const animatedElements = document.querySelectorAll('.slide-left,.labal-slide-left, .pop-up');
+
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.15 // جب عنصر کا 15 فیصد حصہ اسکرین پر آئے تو اینیمیشن شروع ہو
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                // اگر باکس pop-up ہے تو ہلکا سا Stagger Delay دیں تاکہ ایک کے بعد ایک کھلے
+                if (entry.target.classList.contains('pop-up')) {
+                    const cards = Array.from(document.querySelectorAll('.pop-up'));
+                    const index = cards.indexOf(entry.target);
+                    entry.target.style.transitionDelay = `${index * 0.1}s`;
+                }
+                
+                entry.target.classList.add('show');
+            } else {
+                // اسکرین سے باہر جاتے ہی کلاس ہٹا دیں تاکہ دوبارہ اسکرول کرنے پر پھر سے اینیمیٹ ہو
+                entry.target.classList.remove('show');
+                entry.target.style.transitionDelay = '0s'; // واپسی پر فوری ری سیٹ ہو
+            }
+        });
+    }, observerOptions);
+
+    animatedElements.forEach((el) => observer.observe(el));
+});
+    </script>
+</section>
+
+<section id="projects" class="section">
+    <div class="projects-header">
+        <p class="label slide-left">PROJECTS</p>
+        <h2 class="slide-left">My <span>Projects.</span></h2>
+    </div>
+
+    <div class="projects-grid">
+        <!-- Project 01 -->
+        <div class="project-card pop-up">
+            <div class="project-img">
+                <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=600&q=80" alt="Personal Portfolio">
+            </div>
+            <div class="project-content">
+                <div class="project-number">01</div>
+                <h3>Personal Portfolio</h3>
+                <p>
+                    A responsive portfolio website created using
+                    HTML and CSS.
+                </p>
+                <small>HTML · CSS · Responsive Design</small>
+            </div>
+        </div>
+
+        <!-- Project 02 -->
+        <div class="project-card pop-up">
+            <div class="project-img">
+                <img src="https://images.unsplash.com/photo-1542744094-3a31f272c490?auto=format&fit=crop&w=600&q=80" alt="Image Editing Service">
+            </div>
+            <div class="project-content">
+                <div class="project-number">02</div>
+                <h3>Image Editing Service</h3>
+                <p>
+                    Professional background removal and image editing
+                    service using Photoshop.
+                </p>
+                <small>Photoshop · Image Editing</small>
+            </div>
+        </div>
+
+        <!-- Project 03 -->
+        <div class="project-card pop-up">
+            <div class="project-img">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80" alt="Business Landing Page">
+            </div>
+            <div class="project-content">
+                <div class="project-number">03</div>
+                <h3>Business Landing Page</h3>
+                <p>
+                    Modern landing page concept for a small business.
+                </p>
+                <small>HTML · CSS · UI Design</small>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<section id="contact" class="contact">
+<video autoplay muted loop playsinline class="background-video">
+        <source src="c:\Users\abdullah\Desktop\prot web(file)\img web\Untitled design.mp4" type="video/mp4">
+    </video>
+    <p class="label">CONTACT</p>
+
+   <h2>Let's build something<span>great.</span> </h2>
+ <p class="description">
+       Have a vision for your brand? I combine clean code and modern design to bring your ideas to life. Let’s start your project.
+    </p>
+
+    <!-- Contact Me Button Container -->
+<div class="contact-btn-wrapper">
+    <button class="contact-button" id="contactMenuBtn">
+        Contact Me
+    </button>
+
+    <!-- کلک کرنے پر ظاہر ہونے والا ڈراپ ڈاؤن / پاپ-আপ مینیو -->
+    <div id="contactDropdown" class="contact-dropdown-menu">
+        <a href="mailto:your-email@example.com" class="contact-option email-option">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Send Email
+        </a>
+        <a href="https://whatsapp.com/channel/0029VbB1V2d3QxRsd6hLU50r" target="_blank" class="contact-option whatsapp-option">
+            <svg width="18" height="18" viewBox="0 0 32 32" fill="#25D366"><path d="M16 2a13.9 13.9 0 0 0-12 20.9L2.2 29.8l7.1-1.8A14 14 0 1 0 16 2zm0 25.5a11.5 11.5 0 0 1-5.9-1.6l-.4-.3-4.4 1.1 1.2-4.3-.3-.4A11.5 11.5 0 1 1 16 27.5zm6.3-8.6c-.3-.2-2-1-2.3-1.1s-.5-.2-.8.2-.9 1.1-1.1 1.3-.4.2-.7.1a9.4 9.4 0 0 1-2.8-1.7 10.5 10.5 0 0 1-1.9-2.4c-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.4.3-.6s0-.4-.1-.6-.8-1.9-1.1-2.6c-.3-.7-.6-.6-.8-.6h-.7a1.3 1.3 0 0 0-1 .5 4 4 0 0 0-1.3 3 7 7 0 0 0 1.5 3.7 16 16 0 0 0 6.1 5.4c.8.4 1.5.6 2 .8a4.8 4.8 0 0 0 2.2.1 3.6 3.6 0 0 0 2.4-1.7 3 3 0 0 0 .2-1.7c-.1-.2-.3-.3-.6-.4z"/></svg>
+            Join WhatsApp Channel
+        </a>
+    </div>
+</div>
+<script>
+    // --- CONTACT BUTTON DROPDOWN SCRIPT ---
+document.addEventListener("DOMContentLoaded", () => {
+    const contactMenuBtn = document.getElementById("contactMenuBtn");
+    const contactDropdown = document.getElementById("contactDropdown");
+
+    if (contactMenuBtn && contactDropdown) {
+        // بٹن پر کلک کرنے پر مینیو کو کھولنا یا بند کرنا
+        contactMenuBtn.addEventListener("click", (e) => {
+            e.stopPropagation(); // ایونٹ کو اوپر جانے سے روکنے کے لیے
+            contactDropdown.classList.toggle("active");
+        });
+
+        // ویب سائٹ میں کہیں اور کلک کرنے پر مینیو بند ہو جائے
+        window.addEventListener("click", () => {
+            if (contactDropdown.classList.contains("active")) {
+                contactDropdown.classList.remove("active");
+            }
+        });
+    }
+});
+</script>
+</section>
+<footer class="footer pop-up">
+  <div class="footer-container">
+    
+    <!-- Left Side: Brand aur Tagline -->
+    <div class="footer-brand">
+      <h2>Abdullah.</h2>
+      <p>Your vision, powered by my code and design. Let’s build something extraordinary together.</p>
+    </div>
+
+    <!-- Center: Quick Links -->
+    <div class="footer-links">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- Right Side: Contact / Social -->
+    <div class="footer-contact">
+      <h3>Get In Touch</h3>
+      <p>Email: mughalsabzadaabdullah78@gmail.com</p>
+      <div class="social-links">
+        <a href="#">LinkedIn</a>
+        <a href="#">GitHub</a>
+        <a href="#">Instagram</a>
+      </div>
+    </div>
+
+  </div>
+   <!-- Bottom Copyright Line -->
+  <div class="footer-bottom">
+    <p>&copy; 2026 Muhammad Abdullah. All rights reserved.</p>
+  </div>
+</footer>
+<script>
+// --- Super Fast Footer Animation ---
+document.addEventListener("DOMContentLoaded", () => {
+    const footerElement = document.querySelector('footer.footer.pop-up');
+
+    if (footerElement) {
+        const footerObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                } else {
+                    entry.target.classList.remove('show');
+                }
+            });
+        }, {
+            root: null,
+            rootMargin: '200px 0px 200px 0px', // جیسے ہی فوٹر قریب آئے گا، فورا ٹرگر ہو جائے گا
+            threshold: 0
+        });
+
+        footerObserver.observe(footerElement);
+    }
+});
+</script>
+
+
+</body>
+</html>
